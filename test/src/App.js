@@ -31,11 +31,10 @@ function App() {
       <br />
       <label>Enter your age:
       <input 
-        maxLength={125}
         type="number" 
         name="age" 
         min="1"
-        max="250"
+        max="125"
         value={inputs.age || ""} 
         onChange={handleChange}
       />
@@ -43,7 +42,8 @@ function App() {
         <br />
       <label>
       Favorite season:
-      <select name="selectSeason">
+      <select name="season" onChange={handleChange}>
+        <option value=""></option>
         <option value="Spring">Spring</option>
         <option value="Summer">Summer</option>
         <option value="Fall">Fall</option>
@@ -55,15 +55,18 @@ function App() {
         <label>
           <input 
             type="radio" 
-            name="myRadio" 
-            value="option1" />
+            name="drive" 
+            value="yes"
+            onChange={handleChange} 
+            />
           Yes
         </label>
         <label>
           <input
             type="radio"
-            name="myRadio"
-            value="option2" 
+            name="drive"
+            value="no" 
+            onChange={handleChange}
           />
           No
         </label>
@@ -74,6 +77,12 @@ function App() {
       <label>
       {inputs.show &&
         <p>Your age is {inputs.age}.</p>}</label>
+        <label>
+      {inputs.show &&
+        <p>Your favorite season is {inputs.season}.</p>}</label>
+        <label>
+      {inputs.show &&
+        <p>You can drive a car: {inputs.drive}.</p>}</label>
 
       <input type="submit" />
     </form>
