@@ -2,9 +2,8 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  let message = ''
 
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({show: false});
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -15,7 +14,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
-    message = inputs.name
+    setInputs(values => ({...values, show: true}))
   }
 
   return (
@@ -33,8 +32,10 @@ function App() {
       <label>Enter your age:
       <input 
         maxLength={125}
-        type="text" 
+        type="number" 
         name="age" 
+        min="1"
+        max="250"
         value={inputs.age || ""} 
         onChange={handleChange}
       />
@@ -52,9 +53,10 @@ function App() {
       <p>
         Can you drive a car?
         <label>
-          <input type="radio" 
-                  name="myRadio" 
-                  value="option1" />
+          <input 
+            type="radio" 
+            name="myRadio" 
+            value="option1" />
           Yes
         </label>
         <label>
@@ -66,8 +68,14 @@ function App() {
           No
         </label>
       </p>
-      <label>{message}</label>
-        <input type="submit" />
+      <label>
+      {inputs.show &&
+        <p>Your name is {inputs.username}.</p>}</label>
+      <label>
+      {inputs.show &&
+        <p>Your age is {inputs.age}.</p>}</label>
+
+      <input type="submit" />
     </form>
   )
   
